@@ -1,0 +1,2 @@
+﻿Enable-Migrations -ContextTypeName StoryBookContext -MigrationsDirectory Migrations\SB
+add-migration -ConfigurationTypeName StoryBook.Migrations.SB.Configuration "InitialCreate"

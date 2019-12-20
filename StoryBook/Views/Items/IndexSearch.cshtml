@@ -1,0 +1,67 @@
+﻿@model IEnumerable<StoryBook.Models.Item>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<p>
+    @using (@Html.BeginForm("IndexSearch", "Items", FormMethod.Get))
+    {
+        <b>Search By:</b>
+        @Html.RadioButton("searchBy", "ItemName", true) <text>ItemName</text>
+        @Html.RadioButton("searchBy", "ItemDecsription") <text>ItemDecsription</text>
+        @Html.RadioButton("searchBy", "ItemOwner") <text>ItemOwner</text>
+        <br />
+        @Html.TextBox("search") <input type="submit" value="search" />
+    }
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ItemName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ItemDecsription)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ItemOwner)
+        </th>
+        <th></th>
+    </tr>
+    @if (Model.Count() == 0)
+    {
+        <tr>
+            <td colspan="4">
+                No records match search criteria
+            </td>
+        </tr>
+    }
+    else
+    {
+
+        foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ItemName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ItemDecsription)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ItemOwner)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.ItemId }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.ItemId }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.ItemId })
+                </td>
+            </tr>
+        }
+    }
+    </table>
